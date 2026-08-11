@@ -15,7 +15,7 @@ function getTiming(style: StyleId): RevealTiming {
     return { triggerY: mobile ? 0.94 : 0.96 };
   }
   // Modern: wait until content sits higher in the frame (later on mobile)
-  return { triggerY: mobile ? 0.82 : 0.74 };
+  return { triggerY: mobile ? 0.78 : 0.74 };
 }
 
 function shouldReveal(el: HTMLElement, triggerY: number) {
