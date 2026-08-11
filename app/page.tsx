@@ -425,6 +425,20 @@ export default function Home() {
               </label>
               <label className="block">
                 <span className="mb-2 block text-sm font-medium text-ink">
+                  Telefoonnummer
+                </span>
+                <input
+                  type="tel"
+                  name="telefoon"
+                  required
+                  autoComplete="tel"
+                  inputMode="tel"
+                  className="field-input w-full border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal"
+                  placeholder="+31 6 12 34 56 78"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-medium text-ink">
                   Het knelpunt
                 </span>
                 <textarea
