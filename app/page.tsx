@@ -449,6 +449,16 @@ export default function Home() {
                 >
                   hello@landi.software
                 </a>
+                {" · "}
+                WhatsApp{" "}
+                <a
+                  className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
+                  href="https://wa.me/31687343078"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  +31 687343078
+                </a>
               </p>
             </form>
           </div>
