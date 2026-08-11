@@ -887,6 +887,48 @@ html[data-style="atelier"] [data-reveal="work"].is-inview .work-accent {
     font-size: clamp(1.35rem, 6vw, 1.85rem);
   }
 
+  /* Modern mobile: snappier scroll reveals */
+  html[data-style="modern"] [data-reveal] {
+    transition-duration: 0.48s;
+  }
+
+  html[data-style="modern"] .reveal-lines .reveal-line {
+    transition-duration: 0.48s;
+    transition-delay: calc(var(--reveal-delay) + (var(--line-index, 0) * 45ms));
+  }
+
+  html[data-style="modern"] [data-reveal="work"] {
+    transition-duration: 0.5s;
+  }
+
+  html[data-style="modern"] [data-reveal="work"] .work-rule {
+    transition-duration: 0.4s;
+    transition-delay: calc(var(--reveal-delay) + 60ms);
+  }
+
+  html[data-style="modern"] [data-reveal="fade"]:not(.is-inview),
+  html[data-style="modern"] [data-reveal="copy"]:not(.is-inview),
+  html[data-style="modern"]
+    [data-reveal="title"]:not(.reveal-lines):not(.is-inview),
+  html[data-style="modern"] [data-reveal="card"]:not(.is-inview),
+  html[data-style="modern"] [data-reveal="step"]:not(.is-inview) {
+    transform: translateY(16px);
+  }
+
+  html[data-style="modern"]
+    [data-reveal="title"].reveal-lines:not(.is-inview)
+    .reveal-line {
+    transform: translateY(0.45em);
+  }
+
+  html[data-style="modern"] [data-reveal="work"]:not(.is-inview) {
+    transform: translate3d(20px, 0, 0);
+  }
+
+  html[data-style="modern"] [data-reveal="panel"]:not(.is-inview) {
+    transform: translateX(16px);
+  }
+
   .style-switcher-blurb {
     display: none;
   }
