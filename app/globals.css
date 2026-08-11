@@ -468,6 +468,15 @@ html[data-style="modern"] form textarea:focus {
   border-color: #111111;
 }
 
+.contact-success {
+  padding: 1.5rem 0;
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-style="modern"] .contact-success {
+  animation-name: modern-rise;
+}
+
 html[data-style="modern"] main > section:nth-of-type(even) button[type="submit"] {
   background: #ffffff;
   color: #111111;

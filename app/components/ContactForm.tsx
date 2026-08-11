@@ -28,16 +28,30 @@ export function ContactForm() {
   if (state.succeeded) {
     return (
       <div
-        className="space-y-3"
-        data-reveal="panel"
-        style={{ "--reveal-delay": "120ms" } as CSSProperties}
+        className="contact-success is-inview space-y-4"
+        role="status"
+        aria-live="polite"
       >
+        <p className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep">
+          Verstuurd
+        </p>
         <p className="font-display text-2xl text-ink sm:text-3xl">
-          Bedankt — we hebben je brief.
+          Gelukt — je projectbrief is binnen.
         </p>
         <p className="max-w-md text-base leading-relaxed text-slate">
-          We komen zo snel mogelijk terug met een duidelijk pad: scope, planning
-          en wat we als eerste zouden bouwen.
+          Bedankt. We reageren zo snel mogelijk met scope, planning en wat we
+          als eerste zouden bouwen.
+        </p>
+        <p className="text-sm text-slate">
+          Liever direct? WhatsApp{" "}
+          <a
+            className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
+            href="https://wa.me/31687343078"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            +31 687343078
+          </a>
         </p>
       </div>
     );
