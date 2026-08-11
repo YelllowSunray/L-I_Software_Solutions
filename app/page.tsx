@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { ContactForm } from "./components/ContactForm";
 import { DisplayTitle } from "./components/DisplayTitle";
 import { HeroProduct } from "./components/HeroProduct";
 import { Logo } from "./components/Logo";
@@ -389,92 +390,7 @@ export default function Home() {
               </div>
             </div>
 
-            <form
-              className="space-y-4"
-              action="mailto:hello@landi.software"
-              method="post"
-              encType="text/plain"
-              data-reveal="panel"
-              style={{ "--reveal-delay": "120ms" } as CSSProperties}
-            >
-              <label className="block">
-                <span className="mb-2 block text-sm font-medium text-ink">
-                  Naam
-                </span>
-                <input
-                  name="naam"
-                  required
-                  autoComplete="name"
-                  className="field-input w-full border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal"
-                  placeholder="Alex de Vries"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-medium text-ink">
-                  Zakelijk e-mailadres
-                </span>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  autoComplete="email"
-                  inputMode="email"
-                  className="field-input w-full border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal"
-                  placeholder="alex@bedrijf.nl"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-medium text-ink">
-                  Telefoonnummer
-                </span>
-                <input
-                  type="tel"
-                  name="telefoon"
-                  required
-                  autoComplete="tel"
-                  inputMode="tel"
-                  className="field-input w-full border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal"
-                  placeholder="+31 6 12 34 56 78"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-medium text-ink">
-                  Het knelpunt
-                </span>
-                <textarea
-                  name="bericht"
-                  required
-                  rows={4}
-                  className="field-input w-full resize-y border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal"
-                  placeholder="We plannen diensten nog in spreadsheets en niemand vertrouwt de laatste versie…"
-                />
-              </label>
-              <button
-                type="submit"
-                className="min-h-12 w-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal-deep sm:w-auto"
-              >
-                Stuur projectbrief
-              </button>
-              <p className="text-sm text-slate">
-                Of mail naar{" "}
-                <a
-                  className="break-all font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
-                  href="mailto:hello@landi.software"
-                >
-                  hello@landi.software
-                </a>
-                {" · "}
-                WhatsApp{" "}
-                <a
-                  className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
-                  href="https://wa.me/31687343078"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  +31 687343078
-                </a>
-              </p>
-            </form>
+            <ContactForm />
           </div>
         </section>
       </main>
