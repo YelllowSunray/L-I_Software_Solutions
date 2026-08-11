@@ -4,8 +4,6 @@ import { DisplayTitle } from "./components/DisplayTitle";
 import { HeroProduct } from "./components/HeroProduct";
 import { Logo } from "./components/Logo";
 import { LogoMark } from "./components/LogoMark";
-import { StyleSwitcher } from "./components/StyleSwitcher";
-
 const work = [
   {
     name: "Madhu Tattoo — AI Design",
@@ -406,7 +404,6 @@ export default function Home() {
         </div>
       </footer>
 
-      <StyleSwitcher />
     </div>
   );
 }

@@ -14,21 +14,13 @@ export function LogoMark({
   const sizeClass = className || "h-9 w-9 sm:h-10 sm:w-10";
 
   return (
-    <span className={`logo-mark-wrap relative inline-grid shrink-0 ${sizeClass}`}>
+    <span className={`relative inline-block shrink-0 ${sizeClass}`}>
       <Image
         src="/logo-mark.svg"
         alt=""
         width={size}
         height={size}
-        className="logo-mark logo-mark--atelier col-start-1 row-start-1 h-full w-full"
-        priority={priority}
-      />
-      <Image
-        src="/logo-mark-modern.svg"
-        alt=""
-        width={size}
-        height={size}
-        className="logo-mark logo-mark--modern col-start-1 row-start-1 h-full w-full"
+        className="logo-mark h-full w-full"
         priority={priority}
       />
     </span>

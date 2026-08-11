@@ -1,17 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Fraunces, Syne } from "next/font/google";
+import { Figtree, Fraunces } from "next/font/google";
 import { MotionRoot } from "./components/MotionRoot";
-import { StyleProvider } from "./components/StyleProvider";
 import "./globals.css";
 
 const figtree = Figtree({
   variable: "--font-figtree",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const syne = Syne({
-  variable: "--font-syne",
   subsets: ["latin"],
   display: "swap",
 });
@@ -48,38 +41,15 @@ export const metadata: Metadata = {
   },
 };
 
-const styleInitScript = `
-(function () {
-  try {
-    var key = "li-ui-style";
-    var allowed = ["atelier", "modern"];
-    var stored = localStorage.getItem(key);
-    if (stored === "celebration") stored = "modern";
-    var style = allowed.indexOf(stored) !== -1 ? stored : "modern";
-    document.documentElement.setAttribute("data-style", style);
-    localStorage.setItem(key, style);
-  } catch (e) {
-    document.documentElement.setAttribute("data-style", "modern");
-  }
-})();
-`;
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="nl"
-      data-style="modern"
-      className={`${figtree.variable} ${syne.variable} ${fraunces.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: styleInitScript }} />
-      </head>
       <body className="min-h-full flex flex-col font-sans">
-        <StyleProvider>
-          <MotionRoot />
-          {children}
-        </StyleProvider>
+        <MotionRoot />
+        {children}
       </body>
     </html>
   );

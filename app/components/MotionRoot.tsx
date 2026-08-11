@@ -1,22 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useStyle } from "./StyleProvider";
-import type { StyleId } from "../lib/styles";
 
-type RevealTiming = {
-  /** Reveal when element top is above this fraction of the viewport height */
-  triggerY: number;
-};
-
-function getTiming(style: StyleId): RevealTiming {
-  const mobile = window.matchMedia("(max-width: 639px)").matches;
-  if (style === "atelier") {
-    return { triggerY: mobile ? 0.94 : 0.96 };
-  }
-  // Modern: wait until content sits higher in the frame (later on mobile)
-  return { triggerY: mobile ? 0.78 : 0.74 };
-}
+/** Reveal when element top is above this fraction of the viewport height */
+const TRIGGER_Y_DESKTOP = 0.74;
+const TRIGGER_Y_MOBILE = 0.78;
 
 function shouldReveal(el: HTMLElement, triggerY: number) {
   const rect = el.getBoundingClientRect();
@@ -25,7 +13,7 @@ function shouldReveal(el: HTMLElement, triggerY: number) {
   return rect.top < vh * triggerY && rect.bottom > 16;
 }
 
-function observeReveals(style: StyleId) {
+function observeReveals() {
   const nodes = Array.from(
     document.querySelectorAll<HTMLElement>("[data-reveal]"),
   );
@@ -37,7 +25,8 @@ function observeReveals(style: StyleId) {
     return () => {};
   }
 
-  const timing = getTiming(style);
+  const mobile = window.matchMedia("(max-width: 639px)").matches;
+  const triggerY = mobile ? TRIGGER_Y_MOBILE : TRIGGER_Y_DESKTOP;
   const pending = new Set(
     nodes.filter((node) => !node.classList.contains("is-inview")),
   );
@@ -51,11 +40,10 @@ function observeReveals(style: StyleId) {
 
   const flushVisible = () => {
     for (const el of [...pending]) {
-      if (shouldReveal(el, timing.triggerY)) reveal(el);
+      if (shouldReveal(el, triggerY)) reveal(el);
     }
   };
 
-  // Generous IO wake-up; actual timing is gated by shouldReveal + scroll
   const observer = new IntersectionObserver(
     () => flushVisible(),
     {
@@ -90,18 +78,16 @@ function observeReveals(style: StyleId) {
 }
 
 export function MotionRoot() {
-  const { style } = useStyle();
-
   useEffect(() => {
     let cleanup = () => {};
     const id = window.requestAnimationFrame(() => {
-      cleanup = observeReveals(style);
+      cleanup = observeReveals();
     });
     return () => {
       window.cancelAnimationFrame(id);
       cleanup();
     };
-  }, [style]);
+  }, []);
 
   return null;
 }
