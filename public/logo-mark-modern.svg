@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="L&amp;I mark">
+  <rect width="64" height="64" rx="14" fill="#FFFFFF"/>
+  <path d="M11 14h5.5v30.5H28V50H11V14z" fill="#111111"/>
+  <circle cx="37.5" cy="32" r="11.5" fill="#111111"/>
+  <text
+    x="37.5"
+    y="37.2"
+    text-anchor="middle"
+    fill="#FFFFFF"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="16"
+    font-weight="700"
+  >&#38;</text>
+  <path d="M50 14h5.5v36H50V14z" fill="#111111"/>
+</svg>
