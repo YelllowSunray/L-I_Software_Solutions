@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 /** Reveal when element top is above this fraction of the viewport height */
-const TRIGGER_Y_DESKTOP = 0.74;
+const TRIGGER_Y_DESKTOP = 0.8;
 const TRIGGER_Y_MOBILE = 0.78;
 
 function shouldReveal(el: HTMLElement, triggerY: number) {

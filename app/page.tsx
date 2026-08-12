@@ -103,6 +103,30 @@ const steps = [
   },
 ];
 
+const reviews = [
+  {
+    quote:
+      "Van idee naar live AI-tool in weken. Klanten beschrijven hun tattoo — het systeem levert ontwerpen die we echt kunnen gebruiken.",
+    name: "Madhu",
+    role: "Oprichter",
+    company: "Madhu Tattoo",
+  },
+  {
+    quote:
+      "Eindelijk een studieplatform dat voelt als samen werken: video, Pomodoro en documenten in één flow. Geen gedoe, gewoon scherp gebouwd.",
+    name: "Lara Veldman",
+    role: "Product owner",
+    company: "Study Center",
+  },
+  {
+    quote:
+      "Ze snappen zowel de business als de stack. Scope bleef strak, oplevering was snel, en wat live ging deed precies wat we nodig hadden.",
+    name: "Thomas de Boer",
+    role: "Oprichter",
+    company: "Doeklus",
+  },
+];
+
 export default function Home() {
   return (
     <div className="site-shell">
@@ -359,6 +383,73 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        <section
+          id="reviews"
+          className="reviews-section border-t border-[var(--line)] px-4 py-16 sm:px-8 sm:py-28"
+        >
+          <div className="mx-auto max-w-6xl">
+            <p
+              className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
+              data-reveal="fade"
+            >
+              Klanten
+            </p>
+            <DisplayTitle
+              className="mt-4 max-w-3xl text-[1.85rem] text-ink sm:text-5xl"
+              lines={["Woorden van mensen", "die met ons bouwden."]}
+              reveal="lines"
+            />
+
+            <figure
+              className="review-feature mt-12 sm:mt-16"
+              data-reveal="copy"
+              style={{ "--reveal-delay": "80ms" } as CSSProperties}
+            >
+              <blockquote className="font-display text-[1.65rem] leading-[1.15] tracking-tight text-ink sm:text-4xl sm:leading-[1.1]">
+                <span className="review-mark" aria-hidden>
+                  “
+                </span>
+                {reviews[0].quote}
+              </blockquote>
+              <figcaption className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-display text-lg text-ink">
+                  {reviews[0].name}
+                </span>
+                <span className="text-sm text-slate">
+                  {reviews[0].role} · {reviews[0].company}
+                </span>
+              </figcaption>
+            </figure>
+
+            <ul className="review-list mt-14 border-t border-[var(--line)] sm:mt-20">
+              {reviews.slice(1).map((review, index) => (
+                <li
+                  key={review.name}
+                  className="review-item grid gap-4 border-b border-[var(--line)] py-8 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)] sm:gap-12 sm:py-10"
+                  data-reveal="work"
+                  style={
+                    {
+                      "--reveal-delay": `${index * 90}ms`,
+                    } as CSSProperties
+                  }
+                >
+                  <blockquote className="text-lg leading-relaxed text-ink sm:text-xl">
+                    “{review.quote}”
+                  </blockquote>
+                  <div className="sm:pt-1">
+                    <p className="font-display text-base text-ink">
+                      {review.name}
+                    </p>
+                    <p className="mt-1 text-sm text-slate">
+                      {review.role} · {review.company}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
