@@ -27,6 +27,13 @@ const work = [
     href: "https://studycenter-liart.vercel.app",
   },
   {
+    name: "Trading Academy Journal",
+    type: "Fintech platform",
+    summary:
+      "Journal- en P&L-omgeving voor een trading academy: MT5-sync, live statistieken en coachbare studentaccounts.",
+    href: "https://issam-trading-academy.vercel.app/",
+  },
+  {
     name: "Wild Me",
     type: "AI + social app",
     summary:
