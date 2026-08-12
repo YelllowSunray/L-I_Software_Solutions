@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Fraunces } from "next/font/google";
+import { JsonLd } from "./components/JsonLd";
 import { MotionRoot } from "./components/MotionRoot";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "./lib/site";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -19,15 +25,48 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+  ],
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "L&I Software Solutions",
-    template: "%s · L&I Software Solutions",
+    default: `${SITE_NAME} — AI-software & maatwerk apps`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "L&I Software Solutions bouwt AI-gedreven software, apps en maatwerksystemen die echte knelpunten oplossen — snel opgeleverd voor startups en groeiende teams.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "AI software",
+    "maatwerk software",
+    "app ontwikkeling",
+    "software bureau Nederland",
+    "AI apps",
+    "product development",
+    "L&I Software Solutions",
+    "Lenni",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
@@ -40,14 +79,27 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-
   openGraph: {
-    title: "L&I Software Solutions",
-    description:
-      "AI-gedreven software die frictie wegneemt. Apps, platforms en enterprise systemen — snel gebouwd.",
     type: "website",
-    siteName: "L&I Software Solutions",
     locale: "nl_NL",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — AI-software & maatwerk apps`,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
+        alt: `${SITE_NAME} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: `${SITE_NAME} — AI-software & maatwerk apps`,
+    description: SITE_DESCRIPTION,
+    images: ["/web-app-manifest-512x512.png"],
   },
 };
 
@@ -58,6 +110,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <JsonLd />
         <MotionRoot />
         {children}
       </body>

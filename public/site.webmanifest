@@ -1,6 +1,9 @@
 {
   "name": "L&I Software Solutions",
   "short_name": "L&I",
+  "description": "AI-gedreven software, apps en maatwerksystemen voor startups en groeiende teams.",
+  "start_url": "/",
+  "lang": "nl-NL",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

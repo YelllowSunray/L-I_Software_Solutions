@@ -157,7 +157,10 @@ export default function Home() {
               </span>
             </span>
           </a>
-          <nav className="flex shrink-0 items-center gap-3 text-sm text-white/75 sm:gap-6">
+          <nav
+            aria-label="Hoofdnavigatie"
+            className="flex shrink-0 items-center gap-3 text-sm text-white/75 sm:gap-6"
+          >
             <a
               href="#work"
               className="px-1 py-2 transition-colors hover:text-white"
