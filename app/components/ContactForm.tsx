@@ -174,9 +174,9 @@ export function ContactForm() {
         Of mail naar{" "}
         <a
           className="break-all font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
-          href="mailto:hello@landi.software"
+          href="mailto:samir@samirdev.com"
         >
-          hello@landi.software
+          samir@samirdev.com
         </a>
         {" · "}
         WhatsApp{" "}
