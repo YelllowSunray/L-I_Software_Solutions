@@ -6,6 +6,20 @@ import { Logo } from "./components/Logo";
 import { LogoMark } from "./components/LogoMark";
 const work = [
   {
+    name: "PRJCT 7 Cablepark",
+    type: "Website",
+    summary:
+      "Conversiegerichte site voor waterski & wakeboard in Rotterdam: boekingen, tarieven, sfeer en reviews op één plek.",
+    href: "https://prjct7-cablepark.vercel.app/",
+  },
+  {
+    name: "Hi Taxi Hilversum",
+    type: "Website",
+    summary:
+      "Premium taxi-site met Schipholservice, WhatsApp-boeking en sterke social proof — 24/7 van deur tot deur.",
+    href: "https://hi-taxi-delta.vercel.app/",
+  },
+  {
     name: "Madhu Tattoo — AI Design",
     type: "AI-product",
     summary:
@@ -34,32 +48,11 @@ const work = [
     href: "https://issam-trading-academy.vercel.app/",
   },
   {
-    name: "Wild Me",
-    type: "AI + social app",
-    summary:
-      "Sociale app met geïntegreerde AI-beeldediting — van creatieve tools tot challenges die mensen in beweging zetten.",
-    href: "https://www.wild-me.com",
-  },
-  {
-    name: "Wink — Group Calls",
-    type: "Realtime video",
-    summary:
-      "Videobelplatform voor groepen met LiveKit-integratie en rijkere, meer betrokken communicatie.",
-    href: "https://wink.fit",
-  },
-  {
     name: "Backpackers United",
     type: "Community platform",
     summary:
       "Platform dat backpackers wereldwijd verbindt: ervaringen delen, reisgenoten vinden en tips ontdekken.",
     href: "https://www.backpackerunited.com",
-  },
-  {
-    name: "Tapestry",
-    type: "Social product",
-    summary:
-      "Social journaling-platform waarin gebruikers gedachten, ervaringen en herinneringen tot één digitaal verhaal weven.",
-    href: "https://www.tapestry.today",
   },
   {
     name: "Doeklus",
