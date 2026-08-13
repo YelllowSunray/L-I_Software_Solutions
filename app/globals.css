@@ -477,7 +477,7 @@ main > section:nth-of-type(even) button[type="submit"]:hover {
 }
 
 /* ——— Scroll reveals ———
-   Use :not(.is-inview) for initial state so specificity never traps blur/transform. */
+   Hidden only after JS arms `.reveal-ready`, so first paint never looks empty. */
 [data-reveal] {
   --reveal-delay: 0ms;
   opacity: 1;
@@ -489,18 +489,18 @@ main > section:nth-of-type(even) button[type="submit"]:hover {
   transition-delay: var(--reveal-delay);
 }
 
-[data-reveal]:not(.is-inview) {
+html.reveal-ready [data-reveal]:not(.is-inview) {
   opacity: 0;
 }
 
 /* Sharp editorial motion — no blur, no clip-path traps */
-[data-reveal="fade"]:not(.is-inview),
-[data-reveal="copy"]:not(.is-inview) {
+html.reveal-ready [data-reveal="fade"]:not(.is-inview),
+html.reveal-ready [data-reveal="copy"]:not(.is-inview) {
   transform: translateY(20px);
 }
 
 /* Line-stagger titles: parent stays opacity 1; children animate */
-[data-reveal="title"].reveal-lines:not(.is-inview) {
+html.reveal-ready [data-reveal="title"].reveal-lines:not(.is-inview) {
   opacity: 1;
   transform: none;
 }
@@ -513,19 +513,20 @@ main > section:nth-of-type(even) button[type="submit"]:hover {
   transition-delay: calc(var(--reveal-delay) + (var(--line-index, 0) * 70ms));
 }
 
-[data-reveal="title"].reveal-lines:not(.is-inview)
+html.reveal-ready
+  [data-reveal="title"].reveal-lines:not(.is-inview)
   .reveal-line {
   opacity: 0;
   transform: translateY(0.55em);
 }
 
-[data-reveal="title"].reveal-lines.is-inview
-  .reveal-line {
+[data-reveal="title"].reveal-lines.is-inview .reveal-line {
   opacity: 1;
   transform: none;
 }
 
-[data-reveal="title"]:not(.reveal-lines):not(.is-inview) {
+html.reveal-ready
+  [data-reveal="title"]:not(.reveal-lines):not(.is-inview) {
   transform: translateY(20px);
 }
 
@@ -534,19 +535,19 @@ main > section:nth-of-type(even) button[type="submit"]:hover {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-reveal="work"]:not(.is-inview) {
+html.reveal-ready [data-reveal="work"]:not(.is-inview) {
   transform: translate3d(28px, 0, 0);
 }
 
-[data-reveal="card"]:not(.is-inview) {
+html.reveal-ready [data-reveal="card"]:not(.is-inview) {
   transform: translateY(22px);
 }
 
-[data-reveal="step"]:not(.is-inview) {
+html.reveal-ready [data-reveal="step"]:not(.is-inview) {
   transform: translateY(20px);
 }
 
-[data-reveal="panel"]:not(.is-inview) {
+html.reveal-ready [data-reveal="panel"]:not(.is-inview) {
   transform: translateX(22px);
 }
 

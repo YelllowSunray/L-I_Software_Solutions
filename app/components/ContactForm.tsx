@@ -46,11 +46,11 @@ export function ContactForm() {
           Liever direct? WhatsApp{" "}
           <a
             className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
-            href="https://wa.me/31687343078"
+            href="https://wa.me/31625469412"
             target="_blank"
             rel="noopener noreferrer"
           >
-            +31 687343078
+            +31 625469412
           </a>
         </p>
       </div>
@@ -182,11 +182,11 @@ export function ContactForm() {
         WhatsApp{" "}
         <a
           className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
-          href="https://wa.me/31687343078"
+          href="https://wa.me/31625469412"
           target="_blank"
           rel="noopener noreferrer"
         >
-          +31 687343078
+          +31 625469412
         </a>
       </p>
     </form>
