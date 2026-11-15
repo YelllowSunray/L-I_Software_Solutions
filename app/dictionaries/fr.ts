@@ -97,6 +97,16 @@ const fr: Dictionary = {
     viewProject: "Voir le projet",
     items: [
       {
+        type: "Produit IA",
+        summary:
+          "Agent de carrière IA qui trace votre plan de progression, cherche des offres en néerlandais et en anglais, et rédige des lettres de motivation adaptées à chaque annonce.",
+      },
+      {
+        type: "Produit IA",
+        summary:
+          "Recherche IA pour marketplaces qui comprend ce que veulent les acheteurs — pas seulement les mots-clés — avec des classements explicables sur l’inventaire en direct.",
+      },
+      {
         type: "Site web",
         summary:
           "Site orienté conversion pour le ski nautique & le wakeboard à Rotterdam : réservations, tarifs, ambiance et avis au même endroit.",
@@ -143,6 +153,19 @@ const fr: Dictionary = {
       },
     ],
   },
+  concepts: {
+    label: "Concepts de sites web",
+    title: "Voici à quoi pourrait ressembler votre site.",
+    copy: "Des concepts de refonte réalisés de notre propre initiative pour des entreprises existantes — rapides, pensés mobile et orientés réservations et demandes. Pas des clients, mais une idée claire de ce que nous construisons.",
+    view: "Voir le concept",
+    badge: "Concept",
+    types: [
+        "Restaurant · Amsterdam",
+        "Pizzeria · Amsterdam",
+        "Orthodontiste · Dordrecht",
+        "Nettoyage de vitres · Amstelveen",
+    ],
+  },
   process: {
     label: "Notre méthode",
     title: ["Trouver le problème.", "Construire la solution.", "Livrer."],
@@ -164,6 +187,7 @@ const fr: Dictionary = {
   reviews: {
     label: "Clients",
     title: ["Ce qu’en disent", "ceux qui ont construit avec nous."],
+    trustpilot: "Donnez votre avis sur Trustpilot",
     items: [
       {
         quote:

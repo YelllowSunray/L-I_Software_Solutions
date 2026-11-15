@@ -1,0 +1,7 @@
+[     114ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/behandelplan:1
+[     118ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/behandelmethode:1
+[     118ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/team:1
+[     146ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/vragen:1
+[     153ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/contact:1
+[     153ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/aanmelden:1
+[    1379ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://orthodordt.vercel.app/privacy:1

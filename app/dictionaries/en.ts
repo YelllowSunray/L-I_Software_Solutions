@@ -92,6 +92,16 @@ const en: Dictionary = {
     viewProject: "View project",
     items: [
       {
+        type: "AI product",
+        summary:
+          "AI career agent that maps your career ladder, searches job listings in Dutch and English, and writes cover letters that fit each posting.",
+      },
+      {
+        type: "AI product",
+        summary:
+          "AI search for marketplaces that understands what shoppers mean — not just keywords — with explainable rankings on live inventory.",
+      },
+      {
         type: "Website",
         summary:
           "Conversion-focused site for water skiing & wakeboarding in Rotterdam: bookings, rates, atmosphere and reviews in one place.",
@@ -138,6 +148,19 @@ const en: Dictionary = {
       },
     ],
   },
+  concepts: {
+    label: "Website concepts",
+    title: "This is what your website could look like.",
+    copy: "Redesign concepts we made on our own initiative for existing businesses — fast, mobile-first and built for bookings and enquiries. Not clients, but a clear picture of what we build.",
+    view: "View concept",
+    badge: "Concept",
+    types: [
+        "Restaurant · Amsterdam",
+        "Pizzeria · Amsterdam",
+        "Orthodontist · Dordrecht",
+        "Window cleaning · Amstelveen",
+    ],
+  },
   process: {
     label: "How we work",
     title: ["Find the pain.", "Build the solution.", "Ship it."],
@@ -159,6 +182,7 @@ const en: Dictionary = {
   reviews: {
     label: "Clients",
     title: ["Words from people", "who built with us."],
+    trustpilot: "Review us on Trustpilot",
     items: [
       {
         quote:

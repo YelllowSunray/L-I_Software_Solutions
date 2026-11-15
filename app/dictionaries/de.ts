@@ -92,6 +92,16 @@ const de: Dictionary = {
     viewProject: "Projekt ansehen",
     items: [
       {
+        type: "KI-Produkt",
+        summary:
+          "KI-Karriereagent, der Ihre Karriereleiter plant, Stellenanzeigen auf Niederländisch und Englisch durchsucht und Anschreiben passend zu jeder Ausschreibung verfasst.",
+      },
+      {
+        type: "KI-Produkt",
+        summary:
+          "KI-Suche für Marktplätze, die versteht, was Käufer meinen — nicht nur Schlagwörter — mit nachvollziehbaren Rankings auf Live-Angeboten.",
+      },
+      {
         type: "Website",
         summary:
           "Conversionstarke Website für Wasserski & Wakeboard in Rotterdam: Buchungen, Preise, Atmosphäre und Bewertungen an einem Ort.",
@@ -138,6 +148,19 @@ const de: Dictionary = {
       },
     ],
   },
+  concepts: {
+    label: "Website-Konzepte",
+    title: "So könnte Ihre Website aussehen.",
+    copy: "Redesign-Konzepte, die wir aus eigener Initiative für bestehende Unternehmen erstellt haben — schnell, mobile-first und auf Reservierungen und Anfragen ausgerichtet. Keine Auftraggeber, aber ein klares Bild davon, was wir bauen.",
+    view: "Konzept ansehen",
+    badge: "Konzept",
+    types: [
+        "Restaurant · Amsterdam",
+        "Pizzeria · Amsterdam",
+        "Kieferorthopädie · Dordrecht",
+        "Glasreinigung · Amstelveen",
+    ],
+  },
   process: {
     label: "So arbeiten wir",
     title: ["Problem finden.", "Lösung bauen.", "Liefern."],
@@ -159,6 +182,7 @@ const de: Dictionary = {
   reviews: {
     label: "Kunden",
     title: ["Stimmen von Menschen,", "die mit uns gebaut haben."],
+    trustpilot: "Bewerten Sie uns auf Trustpilot",
     items: [
       {
         quote:

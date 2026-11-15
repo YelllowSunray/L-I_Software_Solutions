@@ -90,6 +90,16 @@ const nl = {
     viewProject: "Bekijk project",
     items: [
       {
+        type: "AI-product",
+        summary:
+          "AI-carrièreagent die je carrièreladder uitstippelt, vacatures zoekt in het Nederlands én Engels, en sollicitatiebrieven schrijft die bij elke vacature passen.",
+      },
+      {
+        type: "AI-product",
+        summary:
+          "AI-zoekmachine voor marketplaces die begrijpt wat kopers bedoelen — niet alleen trefwoorden — met uitlegbare rankings op live aanbod.",
+      },
+      {
         type: "Website",
         summary:
           "Conversiegerichte site voor waterski & wakeboard in Rotterdam: boekingen, tarieven, sfeer en reviews op één plek.",
@@ -136,6 +146,19 @@ const nl = {
       },
     ],
   },
+  concepts: {
+    label: "Website-concepten",
+    title: "Zo kan jouw website eruitzien.",
+    copy: "Redesign-concepten die we op eigen initiatief maakten voor bestaande bedrijven — snel, mobiel-first en gericht op reserveringen en aanvragen. Geen opdrachtgevers, wel een goed beeld van wat we bouwen.",
+    view: "Bekijk concept",
+    badge: "Concept",
+    types: [
+        "Restaurant · Amsterdam",
+        "Pizzeria · Amsterdam",
+        "Orthodontist · Dordrecht",
+        "Glazenwasserij · Amstelveen",
+    ],
+  },
   process: {
     label: "Hoe we werken",
     title: ["Vind de pijn.", "Bouw de oplossing.", "Lever op."],
@@ -157,6 +180,7 @@ const nl = {
   reviews: {
     label: "Klanten",
     title: ["Woorden van mensen", "die met ons bouwden."],
+    trustpilot: "Beoordeel ons op Trustpilot",
     items: [
       {
         quote:

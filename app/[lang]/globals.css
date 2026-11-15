@@ -264,26 +264,26 @@ main > section:not(:first-of-type) {
   border-color: transparent;
 }
 
-main > section:nth-of-type(even) {
+main > section:nth-of-type(even):where(:not(#work)) {
   background: #111111;
   color: #fafafa;
 }
 
-main > section:nth-of-type(even) .display-title,
-main > section:nth-of-type(even) .font-display,
-main > section:nth-of-type(even) h3,
-main > section:nth-of-type(even) .text-ink:not(input):not(textarea) {
+main > section:nth-of-type(even):where(:not(#work)) .display-title,
+main > section:nth-of-type(even):where(:not(#work)) .font-display,
+main > section:nth-of-type(even):where(:not(#work)) h3,
+main > section:nth-of-type(even):where(:not(#work)) .text-ink:not(input):not(textarea) {
   color: #fafafa;
 }
 
-main > section:nth-of-type(even) .text-slate,
-main > section:nth-of-type(even) .text-teal-deep,
-main > section:nth-of-type(even) .section-label,
-main > section:nth-of-type(even) .logo-wordmark {
+main > section:nth-of-type(even):where(:not(#work)) .text-slate,
+main > section:nth-of-type(even):where(:not(#work)) .text-teal-deep,
+main > section:nth-of-type(even):where(:not(#work)) .section-label,
+main > section:nth-of-type(even):where(:not(#work)) .logo-wordmark {
   color: rgba(255, 255, 255, 0.62);
 }
 
-main > section:nth-of-type(even) a {
+main > section:nth-of-type(even):where(:not(#work)) a {
   color: #fafafa;
 }
 
@@ -407,12 +407,12 @@ form textarea:focus {
   animation: modern-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-main > section:nth-of-type(even) button[type="submit"] {
+main > section:nth-of-type(even):where(:not(#work)) button[type="submit"] {
   background: #ffffff;
   color: #111111;
 }
 
-main > section:nth-of-type(even) button[type="submit"]:hover {
+main > section:nth-of-type(even):where(:not(#work)) button[type="submit"]:hover {
   background: rgba(255, 255, 255, 0.88);
 }
 

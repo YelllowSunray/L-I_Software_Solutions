@@ -5,6 +5,7 @@ import { DisplayTitle } from "../components/DisplayTitle";
 import { HeroProduct } from "../components/HeroProduct";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { Logo } from "../components/Logo";
+import { TrustpilotWidget } from "../components/TrustpilotWidget";
 import { LogoMark } from "../components/LogoMark";
 import { getDictionary } from "../dictionaries";
 import { hasLocale } from "../lib/i18n";
@@ -12,6 +13,8 @@ import { SERVICE_SLUGS } from "../lib/site";
 
 /** Language-independent project data; texts live in the dictionaries. */
 const work = [
+  { name: "Career OS", href: "https://career-os-three-coral.vercel.app/" },
+  { name: "Entity_OS", href: "https://www.labentity.com/" },
   { name: "PRJCT 7 Cablepark", href: "https://prjct7-cablepark.vercel.app/" },
   { name: "Hi Taxi Hilversum", href: "https://hi-taxi-delta.vercel.app/" },
   { name: "Madhu Tattoo — AI Design", href: "https://madhutattoo.nl" },
@@ -24,6 +27,14 @@ const work = [
   { name: "Backpackers United", href: "https://www.backpackerunited.com" },
   { name: "Doeklus", href: "https://www.doeklus.nl" },
   { name: "Delicacies Europe", href: "https://www.delicacies.eu" },
+];
+
+/** Unsolicited redesign concepts for existing businesses — not clients. */
+const concepts = [
+  { name: "Barça", href: "https://barca-de-pijp.vercel.app" },
+  { name: "Mangiamore", href: "https://mangiamore-neon.vercel.app" },
+  { name: "Ortho Dordt", href: "https://orthodordt.vercel.app" },
+  { name: "Clarius", href: "https://clarius-glazenwasserij.vercel.app" },
 ];
 
 const reviewers = [
@@ -45,6 +56,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     slug: SERVICE_SLUGS[i],
   }));
   const workItems = work.map((item, i) => ({ ...item, ...t.work.items[i] }));
+  const conceptItems = concepts.map((item, i) => ({
+    ...item,
+    type: t.concepts.types[i],
+  }));
   const steps = t.process.steps.map((step, i) => ({ ...step, n: pad(i) }));
   const reviews = reviewers.map((r, i) => ({ ...r, ...t.reviews.items[i] }));
 
@@ -308,6 +323,66 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-16 sm:mt-24">
+              <div className="max-w-2xl">
+                <p
+                  className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
+                  data-reveal="fade"
+                >
+                  {t.concepts.label}
+                </p>
+                <h3
+                  className="font-display mt-4 text-2xl font-semibold text-ink sm:text-3xl"
+                  data-reveal="copy"
+                >
+                  {t.concepts.title}
+                </h3>
+                <p
+                  className="mt-4 text-base leading-relaxed text-slate"
+                  data-reveal="copy"
+                  style={{ "--reveal-delay": "120ms" } as CSSProperties}
+                >
+                  {t.concepts.copy}
+                </p>
+              </div>
+
+              <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
+                {conceptItems.map((item, index) => (
+                  <li
+                    key={item.name}
+                    className="flex flex-col border border-current/15 p-6 transition-colors hover:border-current/40"
+                    data-reveal="card"
+                    style={
+                      {
+                        "--reveal-delay": `${index * 80}ms`,
+                      } as CSSProperties
+                    }
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate">
+                        {item.type}
+                      </p>
+                      <span className="shrink-0 border border-current/30 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-slate">
+                        {t.concepts.badge}
+                      </span>
+                    </div>
+                    <h4 className="font-display mt-3 text-xl font-semibold text-ink">
+                      {item.name}
+                    </h4>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex min-h-11 items-center gap-1.5 pt-4 text-sm font-semibold text-teal-deep transition-colors hover:text-slate"
+                    >
+                      {t.concepts.view}
+                      <span aria-hidden>↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -364,6 +439,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               lines={t.reviews.title}
               reveal="lines"
             />
+            <TrustpilotWidget lang={lang} label={t.reviews.trustpilot} />
 
             <figure
               className="review-feature mt-12 sm:mt-16"
