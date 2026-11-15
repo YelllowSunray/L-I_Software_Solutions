@@ -1,133 +1,53 @@
 import type { CSSProperties } from "react";
-import { ContactForm } from "./components/ContactForm";
-import { DisplayTitle } from "./components/DisplayTitle";
-import { HeroProduct } from "./components/HeroProduct";
-import { Logo } from "./components/Logo";
-import { LogoMark } from "./components/LogoMark";
+import { notFound } from "next/navigation";
+import { ContactForm } from "../components/ContactForm";
+import { DisplayTitle } from "../components/DisplayTitle";
+import { HeroProduct } from "../components/HeroProduct";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { Logo } from "../components/Logo";
+import { LogoMark } from "../components/LogoMark";
+import { getDictionary } from "../dictionaries";
+import { hasLocale } from "../lib/i18n";
+import { SERVICE_SLUGS } from "../lib/site";
+
+/** Language-independent project data; texts live in the dictionaries. */
 const work = [
-  {
-    name: "PRJCT 7 Cablepark",
-    type: "Website",
-    summary:
-      "Conversiegerichte site voor waterski & wakeboard in Rotterdam: boekingen, tarieven, sfeer en reviews op één plek.",
-    href: "https://prjct7-cablepark.vercel.app/",
-  },
-  {
-    name: "Hi Taxi Hilversum",
-    type: "Website",
-    summary:
-      "Premium taxi-site met Schipholservice, WhatsApp-boeking en sterke social proof — 24/7 van deur tot deur.",
-    href: "https://hi-taxi-delta.vercel.app/",
-  },
-  {
-    name: "Madhu Tattoo — AI Design",
-    type: "AI-product",
-    summary:
-      "Een AI-gedreven ontwerptool: beschrijf je idee in een gesprek, en het systeem genereert een passend tattoo-ontwerp.",
-    href: "https://madhutattoo.nl",
-  },
-  {
-    name: "Sue's Tattoo Studio",
-    type: "AI-product",
-    summary:
-      "AI-studio waarmee klanten unieke tattoo-ontwerpen genereren en hun creatieve richting verkennen.",
-    href: "https://sujathascompass.com",
-  },
-  {
-    name: "Study Center",
-    type: "Realtime platform",
-    summary:
-      "Studieplatform met groepsvideogesprekken, gesynchroniseerde Pomodoro, ambient audio en gedeelde documenten.",
-    href: "https://studycenter-liart.vercel.app",
-  },
+  { name: "PRJCT 7 Cablepark", href: "https://prjct7-cablepark.vercel.app/" },
+  { name: "Hi Taxi Hilversum", href: "https://hi-taxi-delta.vercel.app/" },
+  { name: "Madhu Tattoo — AI Design", href: "https://madhutattoo.nl" },
+  { name: "Sue's Tattoo Studio", href: "https://sujathascompass.com" },
+  { name: "Study Center", href: "https://studycenter-liart.vercel.app" },
   {
     name: "Trading Academy Journal",
-    type: "Fintech platform",
-    summary:
-      "Journal- en P&L-omgeving voor een trading academy: MT5-sync, live statistieken en coachbare studentaccounts.",
     href: "https://issam-trading-academy.vercel.app/",
   },
-  {
-    name: "Backpackers United",
-    type: "Community platform",
-    summary:
-      "Platform dat backpackers wereldwijd verbindt: ervaringen delen, reisgenoten vinden en tips ontdekken.",
-    href: "https://www.backpackerunited.com",
-  },
-  {
-    name: "Doeklus",
-    type: "Marketplace",
-    summary:
-      "Platform voor klussen en taken — boodschappen, bezorging, montage — een tool die in Nederland nog ontbrak.",
-    href: "https://www.doeklus.nl",
-  },
-  {
-    name: "Delicacies Europe",
-    type: "E-commerce",
-    summary:
-      "Platform voor geïmporteerde Europese delicatessen — curatie, bestellen en bezorgen van specialty foods.",
-    href: "https://www.delicacies.eu",
-  },
+  { name: "Backpackers United", href: "https://www.backpackerunited.com" },
+  { name: "Doeklus", href: "https://www.doeklus.nl" },
+  { name: "Delicacies Europe", href: "https://www.delicacies.eu" },
 ];
 
-const capabilities = [
-  {
-    title: "AI-gedreven software",
-    copy: "Producten met AI waar het telt: generatie, automatisering, beeldtools en slimme workflows die tijd besparen.",
-  },
-  {
-    title: "Apps & platforms",
-    copy: "Web- en productapps met realtime features, sterke UX en een stack die meegroeit met je bedrijf.",
-  },
-  {
-    title: "Websites & systemen",
-    copy: "Van conversiegerichte sites tot interne tools — gebouwd rond het knelpunt van jouw operatie.",
-  },
+const reviewers = [
+  { name: "Madhu", company: "Madhu Tattoo" },
+  { name: "Lara Veldman", company: "Study Center" },
+  { name: "Thomas de Boer", company: "Doeklus" },
 ];
 
-const steps = [
-  {
-    n: "01",
-    title: "Benoem de pijn",
-    copy: "We brengen de knelpunten in kaart — gemiste diensten, rommelige onboarding, trage processen — vóór we één regel code schrijven.",
-  },
-  {
-    n: "02",
-    title: "Vorm het product",
-    copy: "Strakke scope, heldere UX en een bouwplan dat waarde oplevert in weken, niet in kwartalen.",
-  },
-  {
-    n: "03",
-    title: "Opleveren & verfijnen",
-    copy: "Je krijgt een werkend product, daarna itereren we op basis van echt gebruik — geen eindeloze discovery-trajecten.",
-  },
-];
+const pad = (n: number) => String(n + 1).padStart(2, "0");
 
-const reviews = [
-  {
-    quote:
-      "Van idee naar live AI-tool in weken. Klanten beschrijven hun tattoo — het systeem levert ontwerpen die we echt kunnen gebruiken.",
-    name: "Madhu",
-    role: "Oprichter",
-    company: "Madhu Tattoo",
-  },
-  {
-    quote:
-      "Eindelijk een studieplatform dat voelt als samen werken: video, Pomodoro en documenten in één flow. Geen gedoe, gewoon scherp gebouwd.",
-    name: "Lara Veldman",
-    role: "Product owner",
-    company: "Study Center",
-  },
-  {
-    quote:
-      "Ze snappen zowel de business als de stack. Scope bleef strak, oplevering was snel, en wat live ging deed precies wat we nodig hadden.",
-    name: "Thomas de Boer",
-    role: "Oprichter",
-    company: "Doeklus",
-  },
-];
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const t = await getDictionary(lang);
 
-export default function Home() {
+  const services = t.services.items.map((item, i) => ({
+    ...item,
+    n: pad(i),
+    slug: SERVICE_SLUGS[i],
+  }));
+  const workItems = work.map((item, i) => ({ ...item, ...t.work.items[i] }));
+  const steps = t.process.steps.map((step, i) => ({ ...step, n: pad(i) }));
+  const reviews = reviewers.map((r, i) => ({ ...r, ...t.reviews.items[i] }));
+
   return (
     <div className="site-shell">
       <header className="absolute inset-x-0 top-0 z-30">
@@ -151,29 +71,36 @@ export default function Home() {
             </span>
           </a>
           <nav
-            aria-label="Hoofdnavigatie"
-            className="flex shrink-0 items-center gap-3 text-sm text-white/75 sm:gap-6"
+            aria-label={t.nav.label}
+            className="flex shrink-0 items-center gap-3 whitespace-nowrap text-sm text-white/75 sm:gap-6"
           >
             <a
-              href="#work"
+              href="#diensten"
               className="px-1 py-2 transition-colors hover:text-white"
             >
-              Werk
+              {t.nav.services}
+            </a>
+            <a
+              href="#work"
+              className="hidden px-1 py-2 transition-colors hover:text-white sm:inline"
+            >
+              {t.nav.work}
             </a>
             <a
               href="#contact"
               className="cta-secondary border border-white/25 px-3 py-2 text-white transition-colors hover:border-teal hover:bg-teal/10 sm:px-4"
             >
-              <span className="sm:hidden">Start</span>
-              <span className="hidden sm:inline">Start een project</span>
+              <span className="sm:hidden">{t.nav.ctaShort}</span>
+              <span className="hidden sm:inline">{t.nav.cta}</span>
             </a>
+            <LanguageSwitcher current={lang} label={t.nav.language} />
           </nav>
         </div>
       </header>
 
       <main id="top">
         <div className="hero-band relative overflow-hidden text-white">
-          <HeroProduct />
+          <HeroProduct t={t.heroVisual} />
 
           <section className="relative z-10 min-h-[100svh]">
             <div className="hero-frame relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-end px-4 pb-16 pt-24 sm:justify-center sm:px-8 sm:pb-20 sm:pt-20">
@@ -187,29 +114,23 @@ export default function Home() {
                 <DisplayTitle
                   as="h1"
                   className="reveal reveal-delay-2 mt-6 max-w-[18ch] text-[1.75rem] leading-tight sm:mt-8 sm:text-4xl md:text-[2.75rem]"
-                  lines={[
-                    "Wij bouwen",
-                    "AI-gedreven software",
-                    "die knelpunten oplost.",
-                  ]}
+                  lines={t.hero.title}
                 />
                 <p className="reveal reveal-delay-3 mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/75 sm:mt-5 sm:text-lg">
-                  Slimme apps, platforms en maatwerksystemen voor bedrijven die
-                  willen doorpakken — AI waar het waarde toevoegt, snel
-                  opgeleverd.
+                  {t.hero.copy}
                 </p>
                 <div className="hero-actions reveal reveal-delay-3 mt-7 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                   <a
                     href="#contact"
                     className="cta-primary inline-flex w-full items-center justify-center bg-teal px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-white sm:w-auto sm:py-3"
                   >
-                    Vertel ons het knelpunt
+                    {t.hero.ctaPrimary}
                   </a>
                   <a
-                    href="#work"
+                    href="#diensten"
                     className="cta-secondary inline-flex w-full items-center justify-center border border-white/30 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/5 sm:w-auto sm:py-3"
                   >
-                    Bekijk wat we bouwen
+                    {t.hero.ctaSecondary}
                   </a>
                 </div>
               </div>
@@ -222,11 +143,11 @@ export default function Home() {
                 className="section-label text-sm font-medium uppercase tracking-[0.22em] text-white/55"
                 data-reveal="fade"
               >
-                Positionering
+                {t.positioning.label}
               </p>
               <DisplayTitle
                 className="mt-4 max-w-3xl text-[1.85rem] text-white sm:text-5xl"
-                lines={["AI als voorsprong.", "Software die meewerkt."]}
+                lines={t.positioning.title}
                 reveal="lines"
               />
               <p
@@ -234,13 +155,89 @@ export default function Home() {
                 data-reveal="copy"
                 style={{ "--reveal-delay": "160ms" } as CSSProperties}
               >
-                Wij combineren moderne AI met stevige productontwikkeling: van
-                conversatie-interfaces en beeldgeneratie tot realtime platforms.
-                Geen hype — wel werkende software die frictie wegneemt.
+                {t.positioning.copy}
               </p>
             </div>
           </section>
         </div>
+
+        <section
+          id="diensten"
+          className="scroll-mt-4 border-t border-[var(--line)] px-4 py-16 sm:px-8 sm:py-28"
+        >
+          <div className="mx-auto max-w-6xl">
+            <div className="max-w-2xl">
+              <p
+                className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
+                data-reveal="fade"
+              >
+                {t.services.label}
+              </p>
+              <DisplayTitle
+                className="mt-4 text-[1.85rem] text-ink sm:text-4xl"
+                lines={t.services.title}
+                reveal="lines"
+              />
+              <p
+                className="mt-4 text-base text-slate sm:text-lg"
+                data-reveal="copy"
+                style={{ "--reveal-delay": "140ms" } as CSSProperties}
+              >
+                {t.services.copy}
+              </p>
+            </div>
+
+            <ul className="mt-10 grid gap-px border border-[var(--line)] bg-[var(--line)] sm:mt-14 md:grid-cols-3">
+              {services.map((service, index) => (
+                <li
+                  key={service.slug}
+                  id={service.slug}
+                  className="flex flex-col bg-paper p-6 sm:p-8"
+                  data-reveal="card"
+                  style={
+                    {
+                      "--reveal-delay": `${index * 100}ms`,
+                    } as CSSProperties
+                  }
+                >
+                  <p className="font-display text-sm text-slate">
+                    {service.n}
+                  </p>
+                  <h3 className="font-display mt-3 text-2xl font-semibold text-ink">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm font-medium text-ink">
+                    {service.tagline}
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-slate">
+                    {service.copy}
+                  </p>
+                  <ul className="mt-6 space-y-2.5 border-t border-[var(--line)] pt-6">
+                    {service.includes.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-3 text-sm leading-relaxed text-ink"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-ink"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="mt-auto inline-flex min-h-11 items-center gap-1.5 pt-8 text-sm font-semibold text-teal-deep transition-colors hover:text-slate"
+                  >
+                    {service.cta}
+                    <span aria-hidden>→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
         <section
           id="work"
@@ -252,11 +249,11 @@ export default function Home() {
                 className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
                 data-reveal="fade"
               >
-                Geselecteerd werk
+                {t.work.label}
               </p>
               <DisplayTitle
                 className="mt-4 text-[1.85rem] text-ink sm:text-4xl"
-                lines={["Werk dat onze", "stack laat zien."]}
+                lines={t.work.title}
                 reveal="lines"
               />
               <p
@@ -264,14 +261,12 @@ export default function Home() {
                 data-reveal="copy"
                 style={{ "--reveal-delay": "140ms" } as CSSProperties}
               >
-                AI-producten, realtime platforms en apps met serieuze
-                technische diepgang — elk project linkt door naar de live
-                omgeving.
+                {t.work.copy}
               </p>
             </div>
 
             <ul className="work-list mt-10 border-y border-[var(--line)] sm:mt-14">
-              {work.map((item, index) => (
+              {workItems.map((item, index) => (
                 <li
                   key={item.name}
                   className="work-item relative grid gap-3 py-7 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)] sm:gap-10 sm:py-8"
@@ -303,7 +298,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-teal-deep transition-colors hover:text-ink"
                     >
-                      Bekijk project
+                      {t.work.viewProject}
                       <span aria-hidden>↗</span>
                     </a>
                   </div>
@@ -316,53 +311,17 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-t border-[var(--line)] px-4 py-16 sm:px-8 sm:py-28">
-          <div className="mx-auto max-w-6xl">
-            <p
-              className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
-              data-reveal="fade"
-            >
-              Wat we bouwen
-            </p>
-            <DisplayTitle
-              className="mt-4 max-w-2xl text-[1.85rem] text-ink sm:text-4xl"
-              lines={["AI-first producten", "— en alles eromheen."]}
-              reveal="lines"
-            />
-            <div className="mt-10 grid gap-8 sm:mt-14 sm:gap-10 md:grid-cols-3 md:gap-12">
-              {capabilities.map((item, index) => (
-                <div
-                  key={item.title}
-                  data-reveal="card"
-                  style={
-                    {
-                      "--reveal-delay": `${index * 100}ms`,
-                    } as CSSProperties
-                  }
-                >
-                  <h3 className="font-display text-xl font-semibold text-ink">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed text-slate">
-                    {item.copy}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="border-t border-[var(--line)] bg-ink px-4 py-16 text-white sm:px-8 sm:py-28">
           <div className="mx-auto max-w-6xl">
             <p
               className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal"
               data-reveal="fade"
             >
-              Hoe we werken
+              {t.process.label}
             </p>
             <DisplayTitle
               className="mt-4 max-w-2xl text-[1.85rem] sm:text-4xl"
-              lines={["Vind de pijn.", "Bouw de oplossing.", "Lever op."]}
+              lines={t.process.title}
               reveal="lines"
             />
             <ol className="mt-10 grid gap-8 sm:mt-14 sm:gap-10 md:grid-cols-3">
@@ -398,11 +357,11 @@ export default function Home() {
               className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep"
               data-reveal="fade"
             >
-              Klanten
+              {t.reviews.label}
             </p>
             <DisplayTitle
               className="mt-4 max-w-3xl text-[1.85rem] text-ink sm:text-5xl"
-              lines={["Woorden van mensen", "die met ons bouwden."]}
+              lines={t.reviews.title}
               reveal="lines"
             />
 
@@ -465,24 +424,23 @@ export default function Home() {
               data-reveal="fade"
             >
               <p className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep">
-                Begin hier
+                {t.contact.label}
               </p>
               <DisplayTitle
                 className="mt-4 text-[1.85rem] text-ink sm:text-5xl"
-                lines={["Wat remt", "jullie bedrijf af?"]}
+                lines={t.contact.title}
                 reveal="lines"
                 delay={40}
               />
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate sm:text-lg">
-                Stuur het knelpunt. Wij komen terug met een duidelijk pad —
-                scope, planning en wat we als eerste zouden bouwen.
+                {t.contact.copy}
               </p>
               <div className="mt-8">
                 <Logo />
               </div>
             </div>
 
-            <ContactForm />
+            <ContactForm lang={lang} t={t.form} />
           </div>
         </section>
       </main>
@@ -493,7 +451,7 @@ export default function Home() {
             © {new Date().getFullYear()} {"L&I"} Software Solutions
           </p>
           <p className="text-sm text-slate">
-            AI-software · Apps · Platforms · Maatwerk
+            {t.footer.tagline}
           </p>
         </div>
       </footer>

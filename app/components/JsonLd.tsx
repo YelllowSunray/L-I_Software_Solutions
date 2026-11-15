@@ -1,12 +1,21 @@
+import type { Dictionary } from "../dictionaries";
+import { htmlLang, localePath, type Locale } from "../lib/i18n";
 import {
-  SITE_DESCRIPTION,
+  SERVICE_SLUGS,
   SITE_EMAIL,
   SITE_NAME,
   SITE_PHONE,
   SITE_URL,
 } from "../lib/site";
 
-export function JsonLd() {
+type JsonLdProps = {
+  lang: Locale;
+  dict: Dictionary;
+};
+
+export function JsonLd({ lang, dict }: JsonLdProps) {
+  const pageUrl = `${SITE_URL}${localePath(lang)}`;
+
   const data = {
     "@context": "https://schema.org",
     "@graph": [
@@ -26,7 +35,7 @@ export function JsonLd() {
             contactType: "sales",
             email: SITE_EMAIL,
             telephone: SITE_PHONE,
-            availableLanguage: ["Dutch", "English"],
+            availableLanguage: ["Dutch", "English", "French", "German", "Chinese"],
           },
         ],
       },
@@ -35,29 +44,38 @@ export function JsonLd() {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: SITE_NAME,
-        description: SITE_DESCRIPTION,
         publisher: { "@id": `${SITE_URL}/#organization` },
-        inLanguage: "nl-NL",
+        inLanguage: ["nl-NL", "en", "fr", "de", "zh-Hans"],
       },
       {
         "@type": "ProfessionalService",
         "@id": `${SITE_URL}/#service`,
         name: SITE_NAME,
-        url: SITE_URL,
+        url: pageUrl,
         image: `${SITE_URL}/web-app-manifest-512x512.png`,
-        description: SITE_DESCRIPTION,
+        description: dict.meta.description,
         email: SITE_EMAIL,
         telephone: SITE_PHONE,
+        inLanguage: htmlLang[lang],
         areaServed: {
           "@type": "Country",
           name: "Netherlands",
         },
-        serviceType: [
-          "AI software development",
-          "Custom software",
-          "Web applications",
-          "Product development",
-        ],
+        serviceType: dict.services.items.map((item) => item.title),
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: dict.services.label,
+          itemListElement: dict.services.items.map((item, index) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: item.title,
+              description: item.copy,
+              url: `${pageUrl}#${SERVICE_SLUGS[index]}`,
+              provider: { "@id": `${SITE_URL}/#organization` },
+            },
+          })),
+        },
         provider: { "@id": `${SITE_URL}/#organization` },
       },
     ],

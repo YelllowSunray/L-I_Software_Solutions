@@ -2,13 +2,24 @@
 
 import { useForm, ValidationError } from "@formspree/react";
 import type { CSSProperties } from "react";
+import type { Dictionary } from "../dictionaries";
+import nl from "../dictionaries/nl";
+import type { Locale } from "../lib/i18n";
 
 const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 const fieldClass =
   "field-input w-full border border-[var(--line)] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-teal";
 
-export function ContactForm() {
+type ContactFormProps = {
+  lang: Locale;
+  t: Dictionary["form"];
+};
+
+/** Option values stay Dutch so submissions are consistent in the inbox. */
+const serviceValues = nl.form.serviceOptions;
+
+export function ContactForm({ lang, t }: ContactFormProps) {
   const [state, handleSubmit] = useForm(formId || "formspree-missing");
 
   if (!formId) {
@@ -18,8 +29,9 @@ export function ContactForm() {
         data-reveal="panel"
         style={{ "--reveal-delay": "120ms" } as CSSProperties}
       >
-        Formulier is nog niet gekoppeld. Zet{" "}
-        <code className="text-ink">NEXT_PUBLIC_FORMSPREE_ID</code> in{" "}
+        {t.notConfigured}{" "}
+        <code className="text-ink">NEXT_PUBLIC_FORMSPREE_ID</code>{" "}
+        {t.notConfiguredIn}{" "}
         <code className="text-ink">.env.local</code>.
       </p>
     );
@@ -33,17 +45,16 @@ export function ContactForm() {
         aria-live="polite"
       >
         <p className="section-label text-sm font-medium uppercase tracking-[0.22em] text-teal-deep">
-          Verstuurd
+          {t.sentLabel}
         </p>
         <p className="font-display text-2xl text-ink sm:text-3xl">
-          Gelukt — je projectbrief is binnen.
+          {t.sentTitle}
         </p>
         <p className="max-w-md text-base leading-relaxed text-slate">
-          Bedankt. We reageren zo snel mogelijk met scope, planning en wat we
-          als eerste zouden bouwen.
+          {t.sentCopy}
         </p>
         <p className="text-sm text-slate">
-          Liever direct? WhatsApp{" "}
+          {t.direct}{" "}
           <a
             className="font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
             href="https://wa.me/31625469412"
@@ -64,7 +75,12 @@ export function ContactForm() {
       data-reveal="panel"
       style={{ "--reveal-delay": "120ms" } as CSSProperties}
     >
-      <input type="hidden" name="_subject" value="Nieuwe projectbrief — L&I" />
+      <input
+        type="hidden"
+        name="_subject"
+        value={`Nieuwe projectbrief — L&I (${lang.toUpperCase()})`}
+      />
+      <input type="hidden" name="taal" value={lang} />
       {/* Honeypot */}
       <input
         type="text"
@@ -76,17 +92,17 @@ export function ContactForm() {
       />
 
       <label className="block">
-        <span className="mb-2 block text-sm font-medium text-ink">Naam</span>
+        <span className="mb-2 block text-sm font-medium text-ink">{t.name}</span>
         <input
           id="naam"
           name="naam"
           required
           autoComplete="name"
           className={fieldClass}
-          placeholder="Alex de Vries"
+          placeholder={t.namePlaceholder}
         />
         <ValidationError
-          prefix="Naam"
+          prefix={t.name}
           field="naam"
           errors={state.errors}
           className="mt-1 block text-sm text-red-600"
@@ -95,7 +111,7 @@ export function ContactForm() {
 
       <label className="block">
         <span className="mb-2 block text-sm font-medium text-ink">
-          Zakelijk e-mailadres
+          {t.email}
         </span>
         <input
           id="email"
@@ -105,10 +121,10 @@ export function ContactForm() {
           autoComplete="email"
           inputMode="email"
           className={fieldClass}
-          placeholder="alex@bedrijf.nl"
+          placeholder={t.emailPlaceholder}
         />
         <ValidationError
-          prefix="E-mail"
+          prefix={t.email}
           field="email"
           errors={state.errors}
           className="mt-1 block text-sm text-red-600"
@@ -117,7 +133,7 @@ export function ContactForm() {
 
       <label className="block">
         <span className="mb-2 block text-sm font-medium text-ink">
-          Telefoonnummer
+          {t.phone}
         </span>
         <input
           id="telefoon"
@@ -127,10 +143,10 @@ export function ContactForm() {
           autoComplete="tel"
           inputMode="tel"
           className={fieldClass}
-          placeholder="+31 6 12 34 56 78"
+          placeholder={t.phonePlaceholder}
         />
         <ValidationError
-          prefix="Telefoon"
+          prefix={t.phone}
           field="telefoon"
           errors={state.errors}
           className="mt-1 block text-sm text-red-600"
@@ -139,7 +155,28 @@ export function ContactForm() {
 
       <label className="block">
         <span className="mb-2 block text-sm font-medium text-ink">
-          Het knelpunt
+          {t.service}
+        </span>
+        <select
+          id="dienst"
+          name="dienst"
+          defaultValue=""
+          className={`${fieldClass} appearance-none`}
+        >
+          <option value="" disabled>
+            {t.servicePlaceholder}
+          </option>
+          {t.serviceOptions.map((option, index) => (
+            <option key={serviceValues[index]} value={serviceValues[index]}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="block">
+        <span className="mb-2 block text-sm font-medium text-ink">
+          {t.message}
         </span>
         <textarea
           id="bericht"
@@ -147,10 +184,10 @@ export function ContactForm() {
           required
           rows={4}
           className={`${fieldClass} resize-y`}
-          placeholder="We plannen diensten nog in spreadsheets en niemand vertrouwt de laatste versie…"
+          placeholder={t.messagePlaceholder}
         />
         <ValidationError
-          prefix="Bericht"
+          prefix={t.message}
           field="bericht"
           errors={state.errors}
           className="mt-1 block text-sm text-red-600"
@@ -162,7 +199,7 @@ export function ContactForm() {
         disabled={state.submitting}
         className="min-h-12 w-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal-deep disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {state.submitting ? "Versturen…" : "Stuur projectbrief"}
+        {state.submitting ? t.submitting : t.submit}
       </button>
 
       <ValidationError
@@ -171,7 +208,7 @@ export function ContactForm() {
       />
 
       <p className="text-sm text-slate">
-        Of mail naar{" "}
+        {t.orMail}{" "}
         <a
           className="break-all font-medium text-ink underline decoration-teal/50 underline-offset-4 hover:decoration-teal"
           href="mailto:info@lenni.nl"

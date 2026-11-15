@@ -1,4 +1,6 @@
-export function HeroProduct() {
+import type { Dictionary } from "../dictionaries";
+
+export function HeroProduct({ t }: { t: Dictionary["heroVisual"] }) {
   return (
     <div
       aria-hidden
@@ -22,19 +24,19 @@ export function HeroProduct() {
           <div className="flex h-full flex-col p-6 sm:p-10">
             <div className="mb-8 border-b border-white/10 pb-4">
               <p className="text-[0.65rem] uppercase tracking-[0.22em] text-teal">
-                AI-werkruimte
+                {t.label}
               </p>
               <p className="font-display mt-1 text-xl text-white sm:text-2xl">
-                Slimme productflow
+                {t.title}
               </p>
             </div>
 
             <div className="flex flex-1 flex-col gap-3">
               <div className="max-w-[85%] self-start border border-white/10 bg-white/[0.04] px-3 py-2.5 text-xs leading-relaxed text-white/70 sm:text-sm">
-                Genereer een planning op basis van bezetting en voorkeuren…
+                {t.prompt}
               </div>
               <div className="max-w-[85%] self-end border border-teal/30 bg-teal/15 px-3 py-2.5 text-xs leading-relaxed text-white sm:text-sm">
-                Klaar. Concept gegenereerd — 12 diensten, 0 conflicten.
+                {t.reply}
               </div>
               <div className="mt-2 grid flex-1 grid-cols-3 gap-2 sm:grid-cols-4">
                 {Array.from({ length: 8 }).map((_, i) => (

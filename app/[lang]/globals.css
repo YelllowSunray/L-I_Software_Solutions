@@ -785,3 +785,31 @@ main > section:nth-of-type(odd) .review-item {
     transition: none !important;
   }
 }
+
+/* Language switcher (native <details>) */
+.lang-switcher > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chinese: CJK glyphs fall back to system fonts; Latin tracking looks cramped */
+html:lang(zh) {
+  --display-tracking: 0;
+  --section-label-tracking: 0.12em;
+}
+
+html:lang(zh) .display-title,
+html:lang(zh) .font-display {
+  letter-spacing: 0.01em;
+}
+
+html:lang(zh) .section-label {
+  letter-spacing: 0.12em;
+}
+
+/* Menu items: undo the uppercase nav-link styling */
+header nav .lang-switcher ul a {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
