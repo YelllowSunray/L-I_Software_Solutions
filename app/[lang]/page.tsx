@@ -22,11 +22,11 @@ const work = [
   { name: "Study Center", href: "https://studycenter-liart.vercel.app" },
   {
     name: "Trading Academy Journal",
-    href: "https://issam-trading-academy.vercel.app/",
+    href: "https://tradechain.me",
   },
-  { name: "Backpackers United", href: "https://www.backpackerunited.com" },
-  { name: "Doeklus", href: "https://www.doeklus.nl" },
-  { name: "Delicacies Europe", href: "https://www.delicacies.eu" },
+  { name: "Backpackers United", href: "https://seb-s-backpackers-united.vercel.app" },
+  { name: "Doeklus", href: "https://doeklus.vercel.app" },
+  { name: "Delicacies Europe", href: "https://eu-delicacies.vercel.app" },
 ];
 
 /** Unsolicited redesign concepts for existing businesses — not clients. */
